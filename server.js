@@ -21,7 +21,7 @@ cron.schedule('0 1 * * *', () => {
 							});
 						});
 					});
-				}, (10 + +charArray[counter] + +charArray[counter]/10) * 60000);
+				}, (600000 + +charArray[counter] + +charArray[counter]/10) * 60000);
 			});
 		});
 	}
