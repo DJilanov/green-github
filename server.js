@@ -4,7 +4,7 @@ const fs = require('fs');
 
 let gitPusher = () => {
 	const times = Math.floor(Math.random() * 13);
-	const randomCharArray = (Math.floor(1e5 + Math.random() * 9e5) + '' + Math.floor(1e5 + Math.random() * 9e5)).split(''); // you must use 32 bit integers in NodeJS
+	const randomCharArray = (Math.floor(1e7 + Math.random() * 9e7) + '' + Math.floor(1e7 + Math.random() * 9e7)).split(''); // you must use 32 bit integers in NodeJS
 	for(let counter = 0; counter < times; counter++) {
 		fs.readFile('../spam/spam.txt', 'utf-8', () => {
 			fs.writeFile('../spam/spam.txt', Math.random() + '', 'utf-8', () => {
