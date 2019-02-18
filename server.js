@@ -1,13 +1,13 @@
 const cron = require('node-cron');
 const exec = require('child_process').exec;
 const fs = require('fs');
- 
-cron.schedule('0 1 * * *', () => {
+
+let gitPusher = () => {
 	const times = Math.floor(Math.random() * 13);
 	const randomCharArray = (Math.floor(1e5 + Math.random() * 9e5) + '' + Math.floor(1e5 + Math.random() * 9e5)).split(''); // you must use 32 bit integers in NodeJS
 	for(let counter = 0; counter < times; counter++) {
-		fs.readFile('../spam/spam.txt', 'utf-8', (err, data) => {
-			fs.writeFile('../spam/spam.txt', Math.random() + '', 'utf-8', (err) => {
+		fs.readFile('../spam/spam.txt', 'utf-8', () => {
+			fs.writeFile('../spam/spam.txt', Math.random() + '', 'utf-8', () => {
 				setTimeout(() => {
 					console.log('Activated at ' + 10 + +randomCharArray[counter] + +randomCharArray[counter]/10);
 					exec('git --git-dir ../spam/.git --work-tree=../spam add .', () => {
@@ -25,8 +25,16 @@ cron.schedule('0 1 * * *', () => {
 			});
 		});
 	}
-
+}
+ 
+cron.schedule('0 1 * * *', () => {
+	gitPusher();
 }, {
 	scheduled: true,
 	timezone: "America/Sao_Paulo"
 });
+
+// Run the pusher on start 
+gitPusher();
+
+console.log('Green github launched');
