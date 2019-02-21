@@ -31,7 +31,7 @@ let gitPusher = () => {
 
 cron.schedule('0 1 * * *', () => {
 	gitPusher();
-	console.log('Activate the pushed by the cron');
+	console.log('Activate the pusher by the cron');
 }, {
 		scheduled: true,
 		timezone: "America/Sao_Paulo"
