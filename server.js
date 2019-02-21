@@ -7,7 +7,7 @@ let gitPusher = () => {
 	console.log('Times: ', times);
 	const randomCharArray = (Math.floor(1e7 + Math.random() * 9e7) + '' + Math.floor(1e7 + Math.random() * 9e7)).split(''); // you must use 32 bit integers in NodeJS
 	console.log('Char array: ', randomCharArray);
-	for(let counter = 0; counter < times; counter++) {
+	for (let counter = 0; counter < times; counter++) {
 		fs.readFile('../spam/spam.txt', 'utf-8', () => {
 			fs.writeFile('../spam/spam.txt', Math.random() + '', 'utf-8', () => {
 				setTimeout(() => {
@@ -19,23 +19,24 @@ let gitPusher = () => {
 							});
 						});
 					});
-				}, 
+				},
 					36e6 + // 10 hours
 					+randomCharArray[counter] * 36e5 + // the random num as hours
-					+randomCharArray[counter]/10 // second number min as minutes
+					+randomCharArray[counter] / 10 // second number min as minutes
 				);
+				console.log('Set timeout for: ' + new Date(36e6 + +randomCharArray[counter] * 36e5 + +randomCharArray[counter] / 10);
 			});
 		});
 	}
 }
- 
+
 cron.schedule('0 1 * * *', () => {
 	gitPusher();
 	console.log('Activate the pushed by the cron');
 }, {
-	scheduled: true,
-	timezone: "America/Sao_Paulo"
-});
+		scheduled: true,
+		timezone: "America/Sao_Paulo"
+	});
 
 // Run the pusher on start 
 gitPusher();
