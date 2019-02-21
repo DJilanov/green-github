@@ -8,9 +8,9 @@ let gitPusher = () => {
 	const randomCharArray = (Math.floor(1e7 + Math.random() * 9e7) + '' + Math.floor(1e7 + Math.random() * 9e7)).split(''); // you must use 32 bit integers in NodeJS
 	console.log('Char array: ', randomCharArray);
 	for (let counter = 0; counter < times; counter++) {
-		fs.readFile('../spam/spam.txt', 'utf-8', () => {
-			fs.writeFile('../spam/spam.txt', Math.random() + '', 'utf-8', () => {
-				setTimeout(() => {
+		setTimeout(() => {
+			fs.readFile('../spam/spam.txt', 'utf-8', () => {
+				fs.writeFile('../spam/spam.txt', Math.random() + '', 'utf-8', () => {
 					console.log('Activated at: ', (new Date()));
 					exec('git --git-dir ../spam/.git --work-tree=../spam add .', () => {
 						exec(`git --git-dir ../spam/.git --work-tree=../spam commit -m"Push at ${Math.floor(Math.random() * Math.floor(13))}"`, () => {
@@ -24,8 +24,8 @@ let gitPusher = () => {
 					+randomCharArray[counter] * 36e5 + // the random num as hours
 					+randomCharArray[counter] / 10 // second number min as minutes
 				);
-				console.log('Set timeout for: ' + new Date(36e6 + +randomCharArray[counter] * 36e5 + +randomCharArray[counter] / 10);
 			});
+			console.log('Set timeout for: ' + new Date(36e6 + +randomCharArray[counter] * 36e5 + +randomCharArray[counter] / 10);
 		});
 	}
 }
