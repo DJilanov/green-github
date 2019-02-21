@@ -22,11 +22,11 @@ let gitPusher = () => {
 				});
 			});
 		},
-			(new Date).getTime()
-			+ randomCharArray[counter] * 36e5 + // the random num as hours
-			+randomCharArray[counter] / 10 // second number min as minutes
+			(new Date).getTime() +
+			+randomCharArray[counter] * 36e5 + // the random num as hours
+			+randomCharArray[counter] * 36e3 // second number min as minutes
 		);
-		console.log('Set timeout for: ' + new Date((new Date).getTime() + +randomCharArray[counter] * 36e5 + +randomCharArray[counter] / 10));
+		console.log('Set timeout for: ' + new Date((new Date).getTime() + +randomCharArray[counter] * 36e5 + +randomCharArray[counter] * 36e3));
 	}
 }
 
