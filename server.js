@@ -9,18 +9,26 @@ let gitPusher = () => {
 	console.log('Char array: ', randomCharArray);
 	for (let counter = 0; counter < times; counter++) {
 		setTimeout(() => {
-			fs.readFile('../spam/spam.txt', 'utf-8', () => {
-				fs.writeFile('../spam/spam.txt', Math.random() + '', 'utf-8', () => {
-					console.log('Activated at: ', (new Date()));
-					exec('git --git-dir ../spam/.git --work-tree=../spam add .', () => {
-						exec(`git --git-dir ../spam/.git --work-tree=../spam commit -m"Push at ${Math.floor(Math.random() * Math.floor(13))}"`, () => {
-							exec('git --git-dir ../spam/.git --work-tree=../spam push', () => {
-								console.log('Done');
+			try {
+				fs.readFile('../spam/spam.txt', 'utf-8', () => {
+					fs.writeFile('../spam/spam.txt', Math.random() + '', 'utf-8', () => {
+						console.log('Activated at: ', (new Date()));
+						exec('git --git-dir ../spam/.git --work-tree=../spam add .', () => {
+							exec(`git --git-dir ../spam/.git --work-tree=../spam commit -m"Push at ${Math.floor(Math.random() * Math.floor(13))}"`, () => {
+								exec('git --git-dir ../spam/.git --work-tree=../spam push', () => {
+									console.log('Done');
+								});
 							});
 						});
 					});
 				});
-			});
+			} catch (err) {
+				if (err.code === 'ENOENT') {
+					console.log('File not found!');
+				} else {
+					throw 'error' + err;
+				}
+			}
 		},
 			+randomCharArray[counter] * 36e5 + // the random num as hours
 			+randomCharArray[counter] * 36e3 // second number min as minutes
